@@ -1,5 +1,6 @@
-CC= g++
-CFLAGS= -g -O2 -shared -fPIC -I /usr/include/lua5.1/ -I/usr/include/mongo/
+CXX= g++
+LUA_INC= -I/usr/include/lua5.1/
+CXXFLAGS= -g -O2 -shared -fPIC $(LUA_INC) -I/usr/include/mongo/
 AR= ar rcu
 RANLIB= ranlib
 RM= rm -f
@@ -16,37 +17,37 @@ clean:
 	$(RM) $(OBJS) $(OUTLIB)
 
 luamongo: $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(OUTLIB) $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(OUTLIB) $(LDFLAGS)
 
 echo:
-	@echo "CC = $(CC)"
-	@echo "CFLAGS = $(CFLAGS)"
+	@echo "CXX = $(CXX)"
+	@echo "CXXFLAGS = $(CXXFLAGS)"
 	@echo "AR = $(AR)"
 	@echo "RANLIB = $(RANLIB)"
 	@echo "RM = $(RM)"
 	@echo "LDFLAGS = $(LDFLAGS)"
 
 main.o: main.cpp utils.h
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 mongo_dbclient.o: mongo_dbclient.cpp common.h utils.h
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 mongo_connection.o: mongo_connection.cpp common.h utils.h
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 mongo_cursor.o: mongo_cursor.cpp common.h utils.h
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 mongo_gridfile.o: mongo_gridfile.cpp common.h utils.h
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 mongo_gridfs.o: mongo_gridfs.cpp common.h utils.h
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 mongo_gridfschunk.o: mongo_gridfschunk.cpp common.h utils.h
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 mongo_query.o: mongo_query.cpp common.h utils.h
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 mongo_replicaset.o: mongo_replicaset.cpp common.h utils.h
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 mongo_bsontypes.o: mongo_bsontypes.cpp common.h
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 utils.o: utils.cpp common.h utils.h
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 .PHONY: all 
